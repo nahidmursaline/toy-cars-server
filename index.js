@@ -41,6 +41,34 @@ async function run() {
 
     })
 
+    app.get('/addToy/:id', async(req, res)=>{
+      const id = req.params.id;
+      const query = {_id: new ObjectId(id)}
+      const result = await addToy.findOne(query)
+      res.send(result);
+    })
+
+    app.put('/addToy/:id', async(req, res)=> {
+      const id = req.params.id;
+      const filter = {_id: new ObjectId(id)}
+      const options = {upsert: true};
+      const updatedToy = req.body;
+      const toy = {
+        $set: {
+          name: updatedToy.name,
+           quantity: updatedToy.quantity,
+           description: updatedToy.description,
+          price: updatedToy.price,
+           rating: updatedToy.rating
+        }
+      }
+      const result = await addToy.updateOne(filter, toy, options)
+      res.send(result);
+
+    })
+
+
+
     app.get('/addAllToys', async(req, res) => {
       const cursor = addToy.find();
       const result = await cursor.toArray()
@@ -63,18 +91,18 @@ async function run() {
       res.send(result)
     })
 
-    app.patch('/addToy/:id', async(req, res)=> {
+    // app.patch('/addToy/:id', async(req, res)=> {
      
-      const id = req.params.id;
-      const filter = {_id: new ObjectId(id)}
-      const updatedToy = req.body;
-      const updatedDoc ={
-        $set: {
-          status: updatedToy.status
-        }
-      }
+    //   const id = req.params.id;
+    //   const filter = {_id: new ObjectId(id)}
+    //   const updatedToy = req.body;
+    //   const updatedDoc ={
+    //     $set: {
+    //       status: updatedToy.status
+    //     }
+    //   }
 
-    })
+    // })
 
 
     // Send a ping to confirm a successful connection
