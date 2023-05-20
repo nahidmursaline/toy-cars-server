@@ -29,7 +29,7 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
+    // await client.connect();
 
     const addToy = client.db('toyCars').collection('addToy')
 
@@ -91,18 +91,7 @@ async function run() {
       res.send(result)
     })
 
-    // app.patch('/addToy/:id', async(req, res)=> {
-     
-    //   const id = req.params.id;
-    //   const filter = {_id: new ObjectId(id)}
-    //   const updatedToy = req.body;
-    //   const updatedDoc ={
-    //     $set: {
-    //       status: updatedToy.status
-    //     }
-    //   }
-
-    // })
+   
 
 
     // Send a ping to confirm a successful connection
