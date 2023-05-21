@@ -85,7 +85,8 @@ async function run() {
     })
 
 
-    // get some data
+    // get some data by email
+    
     app.get('/addToy', async(req, res) => {
       let query = {};
       if(req.query?.sellerEmail){
