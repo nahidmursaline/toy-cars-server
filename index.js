@@ -33,6 +33,9 @@ async function run() {
 
     const addToy = client.db('toyCars').collection('addToy')
 
+
+    // create data
+
     app.post('/addToy', async(req, res)=> {
       const add = req.body;
       console.log(add)
@@ -41,12 +44,17 @@ async function run() {
 
     })
 
+    // get specific data
+
     app.get('/addToy/:id', async(req, res)=>{
       const id = req.params.id;
       const query = {_id: new ObjectId(id)}
       const result = await addToy.findOne(query)
       res.send(result);
     })
+
+
+    // update data
 
     app.put('/addToy/:id', async(req, res)=> {
       const id = req.params.id;
@@ -68,6 +76,7 @@ async function run() {
     })
 
 
+    // get all data
 
     app.get('/addAllToys', async(req, res) => {
       const cursor = addToy.find();
@@ -84,6 +93,7 @@ async function run() {
       res.send(result);
     })
 
+    // Delete Data
     app.delete('/addToy/:id', async(req, res)=>{
       const id = req.params.id;
       const query = {_id: new ObjectId(id)}
